@@ -23,7 +23,6 @@ public class Entry implements Iterable<Block>{
      */
     @Override
     public Iterator<Block> iterator() {
-	    //TODO implement me!!!
-    }
+	    //TODO implement me!!!    }
 
 }
