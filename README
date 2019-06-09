@@ -31,4 +31,3 @@ searcher(P, S):
 Time complexity:
     There is the loop with n - m iterations, while in each iteration we provide only one comparison
     so the complexity of the algorithm is O(n-m) = O(n)
-    

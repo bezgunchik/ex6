@@ -4,7 +4,8 @@ import processing.textStructure.Block;
 import processing.textStructure.Corpus;
 import processing.textStructure.Entry;
 import processing.textStructure.WordResult;
-
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,18 @@ public class NaiveSearch implements IsearchStrategy {
 	 */
 	@Override
 	public List<WordResult> search(String query) {
-		//TODO implement me like one of your french algorithms!
+		List<WordResult> results = new ArrayList<>();
+		Matcher matcher;
+		Pattern pattern = Pattern.compile(query);
+		for (Entry entry : origin) {
+			for (Block block : entry) {
+				matcher = pattern.matcher(block.toString());
+				while (matcher.find()) {
+					results.add(new WordResult(block, query, matcher.start()));
+				}
+			}
+		}
+		return results;
 	}
 
 }
