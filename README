@@ -25,9 +25,17 @@ searcher(P, S):
     n = S.length
     isFound = false
     for i in range(n - m):
-        if P = (S from i to i + m):
+        part = S from i to i + m
+        isMatch = true
+        for j in range(m):
+            if part[j] != P[j]:
+                isMatch = false
+        if isMatch == true:
             isFound = true
 
+
 Time complexity:
-    There is the loop with n - m iterations, while in each iteration we provide only one comparison
-    so the complexity of the algorithm is O(n-m) = O(n)
+    There are two loops one inside another. In the first one there are n - m iterations,
+        while in each iteration there is a loop with m iterations and in each of them there is only
+        one simple action (comparison of two chars).
+        So the complexity of the algorithm is O((n-m)*m)
