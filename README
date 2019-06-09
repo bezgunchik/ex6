@@ -1,0 +1,34 @@
+ilia.bezgin
+heleni.krelman
+
+ilia bezgin
+heleni krelman
+
+336462924
+336462908
+
+=== File Description ===
+
+=== Design ===
+
+=== Implementation issues ===
+
+
+=== Answers to questions ===
+
+Question 2:
+
+Pseudo-code:
+
+searcher(P, S):
+    m = P.length
+    n = S.length
+    isFound = false
+    for i in range(n - m):
+        if P = (S from i to i + m):
+            isFound = true
+
+Time complexity:
+    There is the loop with n - m iterations, while in each iteration we provide only one comparison
+    so the complexity of the algorithm is O(n-m) = O(n)
+    
