@@ -23,18 +23,46 @@ public class NaiveSearch implements IsearchStrategy {
 	 */
 	@Override
 	public List<WordResult> search(String query) {
+		return pick(query);
+	}
+
+	/**
+	 * Searches query string in corpus
+	 * @param query The query string to search for.
+	 * @return  A list of wordResults
+	 */
+	private List<WordResult> pick(String query) {
 		List<WordResult> results = new ArrayList<>();
-		Matcher matcher;
-		Pattern pattern = Pattern.compile(query);
-		for (Entry entry : origin) {
+		for (Entry entry : this.getCorpus()) {
 			for (Block block : entry) {
-				matcher = pattern.matcher(block.toString());
-				while (matcher.find()) {
-					results.add(new WordResult(block, query, matcher.start()));
-				}
+				results.addAll(this.applyAlgorithm(query, block));
 			}
 		}
 		return results;
+	}
+
+	/**
+	 * Applies the search algorithm to the block
+	 * @param query The query string to search for.
+	 * @param block The block to search in
+	 * @return A list of wordResults
+	 */
+	protected List<WordResult> applyAlgorithm(String query, Block block) {
+		List<WordResult> results = new ArrayList<>();
+		Pattern pattern = Pattern.compile(query);
+		Matcher matcher = pattern.matcher(block.toString());
+		while (matcher.find()) {
+			results.add(new WordResult(block, query, matcher.start()));
+		}
+		return results;
+	}
+
+	/**
+	 * Returns the corpus searcher works with
+	 * @return The corpus searcher works with
+	 */
+	protected Corpus getCorpus() {
+		return this.origin;
 	}
 
 }

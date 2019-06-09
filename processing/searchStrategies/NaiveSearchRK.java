@@ -2,9 +2,11 @@ package processing.searchStrategies;
 
 import processing.textStructure.Block;
 import processing.textStructure.Corpus;
+import processing.textStructure.Entry;
 import processing.textStructure.WordResult;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -20,8 +22,24 @@ public class NaiveSearchRK extends NaiveSearch {
 	 */
 	@Override
 	public List<WordResult> search(String query){
-    	//TODO implement me!
+		return super.search(query);
     }
+
+
+	/**
+	 * Applies the search algorithm to the block
+	 * @param query The query string to search for.
+	 * @param block The block to search in
+	 * @return A list of wordResults
+	 */
+	protected List<WordResult> applyAlgorithm(String query, Block block) {
+		List<WordResult> results = new ArrayList<>();
+		int index = RabinKarpMethod(query.toCharArray(), block.toString().toCharArray());
+		if (index != -1) {
+			results.add(new WordResult(block, query, index));
+		}
+		return results;
+	}
 
 	/**
 	 * Implementation of the RK search algorithm.
