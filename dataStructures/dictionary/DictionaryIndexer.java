@@ -37,10 +37,10 @@ public class DictionaryIndexer extends Aindexer<DictionarySearch> {
 
 	}
 
-	@Override
-	protected void castRawData(Object readObject) {
-
-	}
+//	@Override
+//	protected void castRawData(Object readObject) {
+//
+//	}
 
 	@Override
 	protected void writeIndexFile() {

@@ -42,10 +42,10 @@ public class NaiveIndexer extends Aindexer<NaiveSearch> {
 		// does nothing
 	}
 
-	@Override
-	protected void castRawData(Object readObject) {
-		// does nothing
-	}
+//	@Override
+//	protected void castRawData(Object readObject) {
+//		// does nothing
+//	}
 
 	@Override
 	protected void writeIndexFile() {
