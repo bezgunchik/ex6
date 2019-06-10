@@ -9,12 +9,6 @@ import java.util.List;
 
 public class STtvSeriesParsingRule implements IparsingRule {
 
-	private final RandomAccessFile inputFile;
-
-	public STtvSeriesParsingRule(RandomAccessFile randomAccessFile) {
-		//TODO implement me!!!
-    }
-
 
     public Block parseBlock(RandomAccessFile inputFile, long startIdx) throws IOException {
 	    //TODO implement me!!!
