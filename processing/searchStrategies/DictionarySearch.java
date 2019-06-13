@@ -25,6 +25,8 @@ public class DictionarySearch implements IsearchStrategy {
 		//TODO implement me!!!
 	}
 
-
+	public void setCaseSensitive(boolean b) {
+		//TODO to implement!
+	}
 
 }

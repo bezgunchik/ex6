@@ -10,14 +10,10 @@ import java.util.List;
 public class STtvSeriesParsingRule implements IparsingRule {
 
 
-    public Block parseBlock(RandomAccessFile inputFile, long startIdx) throws IOException {
-	    //TODO implement me!!!
-    }
-
-    @Override
-    public int getWordDistance(WordResult first, WordResult second, String[] queryWords) {
-	    //TODO implement me!!!
-    }
+//    @Override
+//    public int getWordDistance(WordResult first, WordResult second, String[] queryWords) {
+//	    //TODO implement me!!!
+//    }
 
 	@Override
 	public Block parseRawBlock(RandomAccessFile inputFile, long startPos, long endPos) {
@@ -29,10 +25,6 @@ public class STtvSeriesParsingRule implements IparsingRule {
 		//TODO implement me!!!
 	}
 
-	@Override
-	public String getMatcherRegex(String[] qWords) {
-		//TODO implement me!!!
-	}
 
 	@Override
 	public void printResult(WordResult wordResult)  {

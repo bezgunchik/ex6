@@ -14,14 +14,14 @@ public interface IparsingRule {
 	enum ParserTypes {SIMPLE, ST_MOVIE, ST_TV}
 	int MAXLINELENGTH = 256;
 
-	/**
-	 * A distance meaasure between WordResult objects. Used to sort results by some confidence measure
-	 * @param first     First WordResult object
-	 * @param second    Second WordResult object
-	 * @param queryWords    The actual query sent to the indexer
-	 * @return  An integer representing some distance measure between the results.
-	 */
-	int getWordDistance(WordResult first, WordResult second, String[] queryWords);
+//	/**
+//	 * A distance meaasure between WordResult objects. Used to sort results by some confidence measure
+//	 * @param first     First WordResult object
+//	 * @param second    Second WordResult object
+//	 * @param queryWords    The actual query sent to the indexer
+//	 * @return  An integer representing some distance measure between the results.
+//	 */
+//	int getWordDistance(WordResult first, WordResult second, String[] queryWords);
 
 	/**
 	 * A parser for a single block of text

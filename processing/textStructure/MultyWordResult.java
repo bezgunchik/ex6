@@ -5,14 +5,19 @@ package processing.textStructure;
  */
 public class MultyWordResult extends WordResult implements Comparable<MultyWordResult> {
 
+	private String[] words;
+	private long[] locs;
+
 	/**
 	 * Constructor matching Super
 	 * @param blk
-	 * @param words
-	 * @param idx
+	 * @param query
+	 * @param locs
 	 */
-	public MultyWordResult(Block blk, String words, long idx) {
-		super(blk, words, idx);
+	public MultyWordResult(String[] query, Block blk, long[] locs) {
+		super(blk, query[0], locs[0]);
+		this.words = query;
+		this.locs = locs;
 	}
 
 	/**
@@ -32,6 +37,7 @@ public class MultyWordResult extends WordResult implements Comparable<MultyWordR
 	@Override
 	public int compareTo(MultyWordResult o) {
 		//TODO implement me!
+		return 0;
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package processing.textStructure;
 
 import java.io.RandomAccessFile;
+import java.util.List;
 
 /**
  * This class represents an arbitrary block of text within a file
@@ -46,7 +47,15 @@ public class Block {
 	 * Get the metadata of the block, if applicable for the parsing rule used
 	 * @return  String of all metadata.
 	 */
-	public String getMeta() {
+	public List<String> getMeta() {
+		//TODO implement me!!!
+	}
+
+	/**
+	 * Sets metadata
+	 * @param metadata metadata to set
+	 */
+	public void setMetadata(List<String> metadata) {
 		//TODO implement me!!!
 	}
 

@@ -12,10 +12,10 @@ public class STmovieParsingRule implements IparsingRule {
 
 
 
-	@Override
-	public int getWordDistance(WordResult first, WordResult second, String[] queryWords) {
-		//TODO implement me!!!
-	}
+//	@Override
+//	public int getWordDistance(WordResult first, WordResult second, String[] queryWords) {
+//		//TODO implement me!!!
+//	}
 
 	@Override
 	public Block parseRawBlock(RandomAccessFile inputFile, long startPos, long endPos) {

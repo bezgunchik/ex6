@@ -40,5 +40,6 @@ public class WordResult implements Comparable<WordResult> {
 	@Override
 	public int compareTo(WordResult wordResult) {
 		//TODO implement me!!!
+		return 0;
 	}
 }

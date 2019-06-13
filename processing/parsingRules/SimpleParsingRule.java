@@ -17,18 +17,18 @@ import java.util.regex.Pattern;
 public class SimpleParsingRule implements IparsingRule{
 
 
-	/**
-	 * A distance measure between two words according to this parsing rule. Will return the distance between the two words
-	 * @param first     First WordResult object
-	 * @param second    Second WordResult object
-	 * @param queryWords    The actual query sent to the indexer
-	 * @return
-	 */
-	@Override
-	public int getWordDistance(WordResult first, WordResult second, String[] queryWords) {
-		//TODO implement me!
-
-	}
+//	/**
+//	 * A distance measure between two words according to this parsing rule. Will return the distance between the two words
+//	 * @param first     First WordResult object
+//	 * @param second    Second WordResult object
+//	 * @param queryWords    The actual query sent to the indexer
+//	 * @return
+//	 */
+//	@Override
+//	public int getWordDistance(WordResult first, WordResult second, String[] queryWords) {
+//		//TODO implement me!
+//
+//	}
 
 	@Override
 	public Block parseRawBlock(RandomAccessFile inputFile, long startPos, long endPos) {
@@ -49,7 +49,7 @@ public class SimpleParsingRule implements IparsingRule{
 		try {
 			long endOfBlockOffset = 0, curBlockEnd;
 			Long lastIndex = inputFile.length();
-			for (long i = endOfBlockOffset; i < lastIndex-rawChunkSize; i += rawChunkSize) {
+			for (long i = endOfBlockOffset; i < lastIndex; i += rawChunkSize) {
 				inputFile.seek(i);
 				int bytesRead = inputFile.read(rawBytes);
 				String rawBlock = new String(rawBytes);
