@@ -10,8 +10,7 @@ import java.util.Iterator;
  */
 public class Corpus implements Iterable<Entry>{
 
-    //TODO to choose id
-//    public static final long serialVersionUID = ???
+    public static final long serialVersionUID = 1L;
 
     private String mainDirPath;
 

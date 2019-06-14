@@ -7,10 +7,13 @@ import processing.textStructure.Block;
 import processing.textStructure.Corpus;
 import processing.textStructure.Entry;
 import processing.textStructure.Word;
+import utils.MD5;
 import utils.Stemmer;
 import utils.WrongMD5ChecksumException;
 
 import java.io.*;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,7 +23,10 @@ import java.util.List;
  */
 public class DictionaryIndexer extends Aindexer<DictionarySearch> {
 
+	String parserName = "???"; //TODO to understand how to extract this name and replace it in lower lines (also to check is it ok to use Paths.get(getCorpus().getPath()).getFileName() for corpus name
+
 	private HashMap<String, List<Word>> dict;
+	private String cacheName;
 
 	/**
 	 * Basic constructor, sets origin Corpus and initializes backing hashmap
@@ -29,6 +35,8 @@ public class DictionaryIndexer extends Aindexer<DictionarySearch> {
 	public DictionaryIndexer(Corpus origin) {
 		super(origin);
 		this.dict = new HashMap<>();
+		this.cacheName = getIndexType().name() + "_" + parserName +
+				"_" + Paths.get(getCorpus().getPath()).getFileName() + ".cache";
 	}
 
 	@Override
@@ -66,6 +74,28 @@ public class DictionaryIndexer extends Aindexer<DictionarySearch> {
 
 	@Override
 	protected void readIndexedFile() throws FileNotFoundException, WrongMD5ChecksumException {
+		try {
+			FileInputStream fis = new FileInputStream(cacheName);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			this.dict = (HashMap<String, List<Word>>) ois.readObject();
+			String checkSum = (String) ois.readObject();
+			if (!checkSum.equals(getCorpus().getChecksum())) {
+				throw new WrongMD5ChecksumException();
+			}
+		} catch (IOException IOexp) {
+			throw new FileNotFoundException();
+		} catch (ClassNotFoundException CNFExp) {
+			// TODO to do something
+		}
+
+//		File folder = new File(getCorpus().getPath());
+//		File[] files = folder.listFiles();
+//		if (files != null) {
+//			for (File file : files)
+//				if (file.getName().equals(cacheName)) {
+//
+//				}
+//		}
 
 	}
 
@@ -76,12 +106,13 @@ public class DictionaryIndexer extends Aindexer<DictionarySearch> {
 
 	@Override
 	protected void writeIndexFile() {
-		String parserName = "???"; //TODO to understand how to extract this name and replace it in lower lines (also to check is it ok to use getCorpus().toString() for corpus name
+		String parserName = "???"; //TODO to understand how to extract this name and replace it in lower lines (also to check is it ok to use Paths.get(getCorpus().getPath()).getFileName() for corpus name
 		try {
-			OutputStream fos = new FileOutputStream(getIndexType().name() + "_" + parserName +
-					"_" + getCorpus().toString() + ".cache");
+			OutputStream fos = new FileOutputStream(cacheName);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(dict);
+//			oos.writeObject(getCorpus());
+			oos.writeObject(getCorpus().getChecksum());
 
 		} catch (FileNotFoundException FNFexp) {
 			// TODO to do something
