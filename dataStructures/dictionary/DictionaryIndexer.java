@@ -10,9 +10,7 @@ import processing.textStructure.Word;
 import utils.Stemmer;
 import utils.WrongMD5ChecksumException;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 
@@ -78,17 +76,28 @@ public class DictionaryIndexer extends Aindexer<DictionarySearch> {
 
 	@Override
 	protected void writeIndexFile() {
+		String parserName = "???"; //TODO to understand how to extract this name and replace it in lower lines (also to check is it ok to use getCorpus().toString() for corpus name
+		try {
+			OutputStream fos = new FileOutputStream(getIndexType().name() + "_" + parserName +
+					"_" + getCorpus().toString() + ".cache");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(dict);
 
+		} catch (FileNotFoundException FNFexp) {
+			// TODO to do something
+		} catch (IOException IOExp) {
+			// TODO to do something
+		}
 	}
 
 	@Override
 	public IparsingRule getParseRule() {
-		return null;
+		return getCorpus().getParsingRule();
 	}
 
 	@Override
 	protected IndexTypes getIndexType() {
-		return null;
+		return IndexTypes.DICT;
 	}
 
 

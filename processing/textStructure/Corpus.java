@@ -10,7 +10,13 @@ import java.util.Iterator;
  */
 public class Corpus implements Iterable<Entry>{
 
-    public Corpus(String path, IparsingRule parsingRule) throws IOException {
+    //TODO to choose id
+//    public static final long serialVersionUID = ???
+
+    private String mainDirPath;
+
+    //TODO to understand if the corpus constrctor is right
+    public Corpus(String path, String parserName) throws IOException {
         /*
         check if the path is a folder or file.
         if file - single entry corpus.
@@ -26,8 +32,10 @@ public class Corpus implements Iterable<Entry>{
 	 * Return the parsing rule used for this corpus
 	 * @return
 	 */
+	//TODO UNDERSTAND IF THIS METHOD HAVE TO RETURN IparsingRule OR ONLY IT'S NAME!? For now I chose a name
 	public IparsingRule getParsingRule() {
 		//TODO implement me!!!
+
 	}
 
     /**
@@ -49,5 +57,11 @@ public class Corpus implements Iterable<Entry>{
 	    //TODO implement me!!!
     }
 
-
+    /**
+     * The path to the corpus folder
+      * @return A String representation of the absolute path to the corpus folder
+     */
+    public String getPath() {
+        return mainDirPath;
+    }
 }
