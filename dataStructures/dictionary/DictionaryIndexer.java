@@ -9,6 +9,7 @@ import processing.textStructure.Entry;
 import processing.textStructure.Word;
 import utils.MD5;
 import utils.Stemmer;
+import utils.Stopwords;
 import utils.WrongMD5ChecksumException;
 
 import java.io.*;
@@ -23,10 +24,9 @@ import java.util.List;
  */
 public class DictionaryIndexer extends Aindexer<DictionarySearch> {
 
-	String parserName = "???"; //TODO to understand how to extract this name and replace it in lower lines (also to check is it ok to use Paths.get(getCorpus().getPath()).getFileName() for corpus name
+
 
 	private HashMap<String, List<Word>> dict;
-	private String cacheName;
 
 	/**
 	 * Basic constructor, sets origin Corpus and initializes backing hashmap
@@ -35,8 +35,6 @@ public class DictionaryIndexer extends Aindexer<DictionarySearch> {
 	public DictionaryIndexer(Corpus origin) {
 		super(origin);
 		this.dict = new HashMap<>();
-		this.cacheName = getIndexType().name() + "_" + parserName +
-				"_" + Paths.get(getCorpus().getPath()).getFileName() + ".cache";
 	}
 
 	@Override
@@ -54,6 +52,7 @@ public class DictionaryIndexer extends Aindexer<DictionarySearch> {
 					String line;
 					String[] words;
 					while ((line = block.getRAF().readLine()) != null)  {
+						line = Stopwords.removeStopWords(line); //TODO strange thing about section 4.3 (make sure you are not using it twice)
 						words = line.split("\\W");
 						for (String word : words) {
 							String base = stemmer.stem(word);
@@ -67,7 +66,6 @@ public class DictionaryIndexer extends Aindexer<DictionarySearch> {
 					// TODO to do something
 				}
 			}
-//			getParseRule().parseFile(entry)
 		}
 
 	}
@@ -75,7 +73,7 @@ public class DictionaryIndexer extends Aindexer<DictionarySearch> {
 	@Override
 	protected void readIndexedFile() throws FileNotFoundException, WrongMD5ChecksumException {
 		try {
-			FileInputStream fis = new FileInputStream(cacheName);
+			FileInputStream fis = new FileInputStream(getIndexedPath());
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			this.dict = (HashMap<String, List<Word>>) ois.readObject();
 			String checkSum = (String) ois.readObject();
@@ -87,28 +85,15 @@ public class DictionaryIndexer extends Aindexer<DictionarySearch> {
 		} catch (ClassNotFoundException CNFExp) {
 			// TODO to do something
 		}
-
-//		File folder = new File(getCorpus().getPath());
-//		File[] files = folder.listFiles();
-//		if (files != null) {
-//			for (File file : files)
-//				if (file.getName().equals(cacheName)) {
-//
-//				}
-//		}
-
 	}
 
-//	@Override
-//	protected void castRawData(Object readObject) {
-//
-//	}
+
 
 	@Override
 	protected void writeIndexFile() {
 		String parserName = "???"; //TODO to understand how to extract this name and replace it in lower lines (also to check is it ok to use Paths.get(getCorpus().getPath()).getFileName() for corpus name
 		try {
-			OutputStream fos = new FileOutputStream(cacheName);
+			OutputStream fos = new FileOutputStream(getIndexedPath());
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(dict);
 //			oos.writeObject(getCorpus());

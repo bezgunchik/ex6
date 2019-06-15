@@ -31,4 +31,9 @@ public class STmovieParsingRule implements IparsingRule {
 	public void printResult(WordResult wordResult) throws IOException {
 		//TODO implement me!!!
 	}
+
+	@Override
+	public String toString() {
+		return ParserTypes.ST_MOVIE.name();
+	}
 }

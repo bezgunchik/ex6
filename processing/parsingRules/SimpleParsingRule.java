@@ -82,6 +82,8 @@ public class SimpleParsingRule implements IparsingRule{
 		return "(.*\\n\\n){1,10}";
 	}
 
-
-
+	@Override
+	public String toString() {
+		return ParserTypes.SIMPLE.name();
+	}
 }

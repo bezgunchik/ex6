@@ -1,14 +1,18 @@
 package processing.searchStrategies;
 
+import processing.textStructure.MultyWordResult;
 import processing.textStructure.Word;
 import processing.textStructure.WordResult;
+import utils.Stopwords;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class DictionarySearch implements IsearchStrategy {
 
 	private HashMap<String, List<Word>> dict;
+	private List<Word> combWords = new ArrayList<>();
 
 	public DictionarySearch(HashMap<String, List<Word>> dict) {
 
@@ -22,7 +26,36 @@ public class DictionarySearch implements IsearchStrategy {
 	 */
 	@Override
 	public List<? extends WordResult> search(String query) {
-		//TODO implement me!!!
+		String[] wordsStr = Stopwords.removeStopWords(query).split("\\W");
+		List<MultyWordResult> allResults = new ArrayList<>();
+		String[] tempsWordsStr = wordsStr;
+		for (int i = 0; i < wordsStr.length; i++) {
+			tempsWordsStr[i] = null;
+			for (Word word : dict.get(wordsStr[i])) {
+				searchHelper(tempsWordsStr, i,0);
+
+			}
+		}
+//		for (String wordStr : words) {
+//
+//
+//
+//		}
+
+	}
+
+
+	private MultyWordResult searchHelper(String[] wordsStr, int testingWordIndex, int index) {
+		if (index == wordsStr.length - 1) {
+			return null;
+		}
+		for (int i = 0; i < wordsStr.length; i++) {
+			if (i != testingWordIndex) {
+
+			}
+		}
+
+
 	}
 
 	public void setCaseSensitive(boolean b) {

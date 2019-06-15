@@ -6,6 +6,7 @@ import processing.textStructure.Corpus;
 import utils.WrongMD5ChecksumException;
 
 import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 
 /**
  * The abstract class describing the necessary methods and common implementations of all indexing data structures.
@@ -65,8 +66,10 @@ public abstract class Aindexer<T extends IsearchStrategy> {
 	 * Getter for the cached index file.
 	 * @return  the path to the cached index file.
 	 */
-	private String getIndexedPath() {
-		//TODO implement me!!!
+	protected String getIndexedPath() {
+		return getCorpus().getPath() + "/" + getIndexType().name() + "_" +
+				getParseRule().toString() + "_" +
+				Paths.get(getCorpus().getPath()).getFileName() + ".cache"; //TODO  (also to check is it ok to use Paths.get(getCorpus().getPath()).getFileName() for corpus name
 	}
 
 	/**

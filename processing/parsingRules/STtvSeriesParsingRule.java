@@ -31,4 +31,8 @@ public class STtvSeriesParsingRule implements IparsingRule {
 		//TODO implement me!!!
 	}
 
+	@Override
+	public String toString() {
+		return ParserTypes.ST_TV.name();
+	}
 }
