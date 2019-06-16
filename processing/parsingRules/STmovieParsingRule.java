@@ -24,7 +24,7 @@ public class STmovieParsingRule implements IparsingRule {
 
 	@Override
 	public List<Block> parseFile(RandomAccessFile inputFile) {
-		//TODO implement me!!!
+
 	}
 
 	@Override
